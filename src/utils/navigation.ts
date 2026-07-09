@@ -12,8 +12,8 @@ const footerLinks = [
   {
     section: 'Layanan',
     links: [
-      { name: 'Jasa Bore Pile', url: '/#harga' },
-      { name: 'Strauss Pile', url: '/#metode' },
+      { name: 'Jasa Bore Pile', url: '/services/bore-pile' },
+      { name: 'Strauss Pile', url: '/services/strauss-pile' },
       { name: 'Portofolio', url: '/portfolio' },
       { name: 'Konsultasi Gratis', url: '/contact' },
     ],

@@ -1,0 +1,95 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import MainSection from '@components/ui/blocks/MainSection.astro';
+import LeftSection from '@components/ui/blocks/LeftSection.astro';
+import RightSection from '@components/ui/blocks/RightSection.astro';
+import FeaturesStats from '@components/sections/features/FeaturesStats.astro';
+
+// Import necessary images
+import borepileImage from '@images/construction-image.avif';
+import equipmentImage from '@images/automated-tools.avif';
+import processImage from '@images/construction-workers.avif';
+import { SITE } from '@data/site';
+
+const pageTitle = `Jasa Bore Pile | ${SITE.title}`;
+const metaDescription = 'Layanan profesional jasa bore pile dengan teknologi modern dan tim berpengalaman. Solusi pondasi dalam untuk bangunan Anda dengan kualitas terjamin.';
+---
+
+<MainLayout
+  title={pageTitle}
+  customDescription={metaDescription}
+  customOgTitle={pageTitle}
+  lang="id"
+  structuredData={{
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    name: 'Jasa Bore Pile',
+    description: metaDescription,
+    provider: {
+      '@type': 'Organization',
+      name: SITE.title,
+    },
+    areaServed: {
+      '@type': 'Place',
+      name: 'Indonesia',
+    },
+  }}
+>
+
+<MainSection
+  title="Jasa Bore Pile Profesional"
+  subTitle="Kami menyediakan layanan jasa bore pile dengan teknologi canggih dan tim berpengalaman untuk memastikan pondasi bangunan Anda kokoh dan tahan lama."
+  btnExists={true}
+  btnTitle="Konsultasi Gratis"
+  btnURL="/contact"
+/>
+
+<LeftSection
+  title="Apa itu Bore Pile?"
+  subTitle="Bore pile adalah metode konstruksi pondasi dalam yang menggunakan teknik pengeboran untuk membuat lubang silindris di tanah, kemudian diisi dengan beton bertulang. Metode ini ideal untuk bangunan dengan beban berat pada kondisi tanah lunak atau tidak stabil."
+  img={borepileImage}
+  imgAlt="Proses konstruksi bore pile"
+/>
+
+<RightSection
+  title="Keunggulan Bore Pile"
+  subTitle="Metode bore pile memiliki berbagai keunggulan dibandingkan pondasi konvensional: daya dukung tinggi, getaran minimal, fleksibel untuk berbagai kondisi tanah, dan ramah lingkungan. Cocok untuk area perkotaan yang padat dan sensitif terhadap getaran."
+  single={false}
+  imgOne={equipmentImage}
+  imgOneAlt="Peralatan bore pile modern"
+  imgTwo={processImage}
+  imgTwoAlt="Proses pengeboran bore pile"
+/>
+
+<LeftSection
+  title="Proses Kerja Bore Pile"
+  subTitle="Tahapan kerja bore pile meliputi: survey dan marking titik bore, pengeboran sesuai kedalaman desain, pembersihan lubang bor, pemasangan tulangan baja, dan pengecoran beton dengan metode tremie. Setiap tahap dikerjakan dengan presisi tinggi dan pengawasan ketat."
+  img={processImage}
+  imgAlt="Tahapan kerja bore pile"
+  btnExists={true}
+  btnTitle="Lihat Portfolio"
+  btnURL="/portfolio"
+/>
+
+<FeaturesStats
+  title="Rekam Jejak Kami"
+  subTitle="Dengan pengalaman lebih dari 10 tahun dalam industri konstruksi, kami telah menyelesaikan ratusan proyek bore pile dengan tingkat kepuasan klien yang tinggi."
+  mainStatTitle="200+"
+  mainStatSubTitle="Proyek bore pile yang telah selesai"
+  stats={[
+    {
+      stat: '15+',
+      description: 'Tahun pengalaman',
+    },
+    {
+      stat: '100%',
+      description: 'Tingkat kepuasan klien',
+    },
+    {
+      stat: '24/7',
+      description: 'Support teknis',
+    },
+  ]}
+/>
+
+</MainLayout>

@@ -41,8 +41,8 @@ interface Props {
       <a
         class="ring-zinc-500 outline-hidden transition duration-300 hover:text-orange-400 focus-visible:ring-3    "
         href={recentBlogLocale && recentBlogLocale !== 'en'
-          ? `/${recentBlogLocale}/blog/${blogEntry.id.replace(/^fr\//, '')}/`
-          : `/blog/${blogEntry.id.replace(/^en\//, '')}/`}
+          ? `/${recentBlogLocale}/blog/static/${blogEntry.id.replace(/^fr\//, '')}/`
+          : `/blog/static/${blogEntry.id.replace(/^en\//, '')}/`}
       >
         {blogEntry.data.description}
       </a>
@@ -64,8 +64,8 @@ interface Props {
     <div class="mt-5">
       <PrimaryCTA
         url={recentBlogLocale && recentBlogLocale !== 'en'
-          ? `/${recentBlogLocale}/blog/${blogEntry.id.replace(/^fr\//, '')}/`
-          : `/blog/${blogEntry.id.replace(/^en\//, '')}/`}
+          ? `/${recentBlogLocale}/blog/static/${blogEntry.id.replace(/^fr\//, '')}/`
+          : `/blog/static/${blogEntry.id.replace(/^en\//, '')}/`}
         title="Read More"
         data-astro-prefetch
       />

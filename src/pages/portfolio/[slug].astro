@@ -1,19 +1,24 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
-import { getPortfolioProjects } from '@/lib/wordpress/woocommerce';
+import { getPortfolioProjects, getPortfolioProjectBySlug } from '@/lib/wordpress/woocommerce';
 import { SITE, COMPANY, createWebPageSchema } from '@/data/site';
 import { IMAGES } from '@/data/images';
 import PortfolioCard from '@/components/jowoland/portfolio/PortfolioCard.astro';
 
-export async function getStaticPaths() {
-  const projects = await getPortfolioProjects();
-  return projects.map(project => ({
-    params: { slug: project.slug },
-    props: { project, allProjects: projects },
-  }));
+// Get slug from URL parameters
+const { slug } = Astro.params;
+
+// Get project data by slug
+const project = slug ? await getPortfolioProjectBySlug(slug) : null;
+
+// Get all projects for "other projects" section
+const allProjects = await getPortfolioProjects();
+
+// Add error handling for undefined project
+if (!project) {
+  return Astro.redirect('/portfolio');
 }
 
-const { project, allProjects } = Astro.props;
 const image = project.image || IMAGES.portfolio.default;
 
 // Strip HTML tags for meta description
@@ -140,7 +145,6 @@ const otherProjects = allProjects.filter(p => p.id !== project.id).slice(0, 4);
                       <>
                         <span class="line-through text-neutral-400 mr-3">{project.price}</span>
                         <span class="text-yellow-600 ">{project.discountPrice}</span>
-                        <span class="ml-2 inline-block rounded-full bg-green-100 px-3 py-1 text-xs font-medium text-green-700  ">Diskon</span>
                       </>
                     ) : project.price
                   }

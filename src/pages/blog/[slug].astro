@@ -1,37 +1,40 @@
 ---
 import MainLayout from '@/layouts/MainLayout.astro';
-import { getBlogPosts } from '@/lib/wordpress/posts';
+import { getBlogPostBySlug } from '@/lib/wordpress/posts';
 import { SITE, createWebPageSchema } from '@/data/site';
 
-export async function getStaticPaths() {
-  const posts = await getBlogPosts(100);
-  return posts.map(post => ({
-    params: { slug: post.slug },
-    props: { post },
-  }));
+// Get slug from URL parameters
+const { slug } = Astro.params;
+
+// Get post data by slug
+const post = slug ? await getBlogPostBySlug(slug) : null;
+
+// Add error handling for undefined post or missing data
+if (!post) {
+  return Astro.redirect('/blog');
 }
 
-const { post } = Astro.props;
+const formattedDate = post.date 
+  ? new Date(post.date).toLocaleDateString('id-ID', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
+    })
+  : 'Tanggal tidak diketahui';
 
-const formattedDate = new Date(post.date).toLocaleDateString('id-ID', {
-  day: 'numeric',
-  month: 'long',
-  year: 'numeric',
-});
-
-const pageTitle = `${post.title} | Blog | ${SITE.title}`;
+const pageTitle = `${post.title || 'Blog Post'} | Blog | ${SITE.title}`;
 ---
 
 <MainLayout
   title={pageTitle}
-  customDescription={post.excerpt}
+  customDescription={post?.excerpt || 'Blog post'}
   customOgTitle={pageTitle}
   lang="id"
   structuredData={{
-    ...createWebPageSchema(`/blog/${post.slug}`, post.title, post.excerpt, 'Article'),
-    headline: post.title,
-    datePublished: post.date,
-    image: post.image,
+    ...createWebPageSchema(`/blog/${post?.slug || ''}`, post?.title || 'Blog Post', post?.excerpt || '', 'Article'),
+    headline: post?.title || '',
+    datePublished: post?.date || '',
+    image: post?.image || '',
   }}
 >
   <article
@@ -46,7 +49,7 @@ const pageTitle = `${post.title} | Blog | ${SITE.title}`;
 
     <div class="mx-auto max-w-3xl">
       <time
-        datetime={post.date}
+        datetime={post?.date || ''}
         class="text-sm font-medium text-yellow-600 "
       >
         {formattedDate}
@@ -54,21 +57,23 @@ const pageTitle = `${post.title} | Blog | ${SITE.title}`;
       <h1
         class="mt-2 text-3xl font-bold text-neutral-800 md:text-4xl "
       >
-        {post.title}
+        {post?.title || 'Blog Post'}
       </h1>
 
-      <div class="mt-8 overflow-hidden rounded-2xl">
-        <img
-          src={post.image}
-          alt={post.imageAlt}
-          class="w-full object-cover"
-          loading="eager"
-        />
-      </div>
+      {post?.image && (
+        <div class="mt-8 overflow-hidden rounded-2xl">
+          <img
+            src={post.image}
+            alt={post?.imageAlt || post?.title || 'Blog post image'}
+            class="w-full object-cover"
+            loading="eager"
+          />
+        </div>
+      )}
 
       <div
         class="prose prose-neutral mt-10 max-w-none "
-        set:html={post.content}
+        set:html={post?.content || '<p>No content available.</p>'}
       />
     </div>
   </article>

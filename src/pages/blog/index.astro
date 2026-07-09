@@ -6,6 +6,7 @@ import { getBlogPosts } from '@/lib/wordpress/posts';
 import { SITE, createWebPageSchema } from '@/data/site';
 import { isWordPressConfigured } from '@/lib/env';
 
+// Get WordPress posts only
 const posts = await getBlogPosts();
 
 const pageTitle = `Blog | ${SITE.title}`;
@@ -25,7 +26,7 @@ const metaDescription =
   >
     <SectionHeader
       title="Blog"
-      subtitle="Artikel edukasi seputar pondasi bore pile, strauss pile, dan tips konstruksi. Konten diambil dari WordPress CMS."
+      subtitle="Artikel edukasi seputar pondasi bore pile, strauss pile, dan tips konstruksi dari PT. Jowo Land Construction."
     />
 
     {
