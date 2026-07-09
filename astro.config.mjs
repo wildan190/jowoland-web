@@ -1,9 +1,11 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
+import netlify from "@astrojs/netlify";
 
 export default defineConfig({
   site: "https://jowolandborepile.co.id",
-  output: "static",
+  output: "server",
+  adapter: netlify(),
   image: {
     domains: ["images.unsplash.com"],
   },

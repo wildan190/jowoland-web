@@ -14,20 +14,18 @@ const stripHtml = (html: string) => {
 };
 ---
 
-<article
-  class="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm  "
->
+<a href="/contact" data-astro-prefetch class="group overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg  ">
   <div class="aspect-4/3 overflow-hidden">
     <img
       src={image}
       alt={project.imageAlt || project.name}
-      class="h-full w-full object-cover"
+      class="h-full w-full object-cover transition duration-300 group-hover:scale-105"
       loading="lazy"
     />
   </div>
   <div class="p-5">
     <h3
-      class="font-bold text-neutral-800 "
+      class="font-bold text-neutral-800 group-hover:text-yellow-600 transition duration-300 "
     >
       {project.name}
     </h3>
@@ -94,5 +92,12 @@ const stripHtml = (html: string) => {
         )
       }
     </dl>
+
+    <div class="mt-4 flex items-center gap-2 font-semibold text-yellow-600">
+      Konsultasi Gratis
+      <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
+    </div>
   </div>
-</article>
+</a>

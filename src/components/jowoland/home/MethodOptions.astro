@@ -25,7 +25,7 @@ const imageMap = {
   <div class="grid gap-8 md:grid-cols-2">
     {
       methodOptions.methods.map(method => (
-        <div class="overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm  ">
+        <a href="/contact" data-astro-prefetch class="group overflow-hidden rounded-2xl border border-neutral-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg  ">
           <img
         src={imageMap[method.imageKey]}
         alt={method.title}
@@ -33,14 +33,20 @@ const imageMap = {
         loading="lazy"
       />
           <div class="p-6">
-            <h3 class="text-xl font-bold text-neutral-800 ">
+            <h3 class="text-xl font-bold text-neutral-800 group-hover:text-yellow-600 transition duration-300">
               {method.title}
             </h3>
             <p class="mt-2 text-neutral-600 ">
               {method.description}
             </p>
+            <p class="mt-4 font-semibold text-yellow-600 flex items-center gap-2">
+              Konsultasi Gratis 
+              <svg class="h-4 w-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+              </svg>
+            </p>
           </div>
-        </div>
+        </a>
       ))
     }
   </div>

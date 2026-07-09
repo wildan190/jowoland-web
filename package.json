@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build && node process-html.mjs",
+    "build": "astro build",
     "format:check": "prettier --check .",
     "format:fix": "prettier --write .",
     "preview": "astro preview",
@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.9",
+    "@astrojs/netlify": "^7.0.13",
     "@astrojs/sitemap": "^3.7.3",
     "@tailwindcss/postcss": "^4.3.1",
     "astro": "^6.4.8",
